@@ -1,6 +1,14 @@
+import ApolloClient from "apollo-boost";
+import gql from "graphql-tag";
+
+
 const bucketUrl = 'https://s3-us-west-1.amazonaws.com/oak-bike/';
 
 const gqlUrl = 'https://oakbike.herokuapp.com/gql';
+
+const client = new ApolloClient({
+    uri: "http://0.0.0.0:5000/graphql/"
+});
 
 const makeid = () => {
   let text = '';
@@ -8,6 +16,7 @@ const makeid = () => {
   for (let i = 0; i < 24; i += 1) text += possible.charAt(Math.floor(Math.random() * 62));
   return text;
 };
+
 
 export const getUserLocation = (options = {}) => new Promise((resolve, reject) => {
   console.log("getUserLocation effect")
@@ -35,4 +44,40 @@ export const doUploadReport = (report) => new Promise((resolve, reject) => {
   fetch(gqlUrl, options)
     .then(success => resolve(success))
     .catch(error => reject(error));
+});
+
+//read
+export const testGql = () => new Promise((resolve, reject) => {
+    client
+        .query({
+            query: gql`
+      {
+        listReports {
+          id
+        }
+      }
+    `
+        })
+        .then(result => console.log(result));
+});
+
+//write
+
+export const CR = gql`
+  mutation createReport($imgUrl: String!) {
+    createReport(imgUrl: $imgUrl ) {
+        id
+    }
+  }
+`;
+
+export const testGqlR = () => new Promise((resolve, reject) => {
+    client
+        .mutate({
+            mutation: CR,
+            variables: {
+              imgUrl: 'test.jpg'
+            },
+        })
+        .then(result => console.log(result));
 });
