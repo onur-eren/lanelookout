@@ -11,6 +11,10 @@ class ReportType(DjangoObjectType):
         only_fields = (
             'id',
             'img_url',
+            'lat',
+            'lng',
+            'contact',
+            'description',
             'date_created'
         )
 
@@ -20,11 +24,24 @@ class CreateReport(graphene.Mutation):
   
     class Arguments:
         img_url = graphene.String(required=False)
+        lat = graphene.Float(required=False)
+        lng = graphene.Float(required=False)
+        contact = graphene.String(required=False)
+        description = graphene.String(required=False)
 
-    def mutate(self, info, **kwargs):
+    def mutate(self, info, img_url, lat, lng, contact, description):
         r = Report.objects.create()
-        if kwargs.get('img_url'):
-            r.img_url = kwargs.get('img_url')
+        if img_url:
+            r.img_url = img_url
+        if lat:
+            r.lat = lat
+        if lng:
+            r.lng = lng
+        if contact:
+            r.contact = contact
+        if description:
+            r.description = description
+        r.save()
         return CreateReport(id=r.id)
 
 
