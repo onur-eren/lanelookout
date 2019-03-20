@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
-import { DETAILS } from "../../constants/report";
+import { DETAILS, coordsOakland } from "../../constants/report";
 import { getUserLocation } from "./effects";
 
 const mapBottomOffset = 60;
@@ -19,13 +19,13 @@ const Location = ({initZoom, coords, setStatus, setCoords }) => {
     }
   }, []);
 
-  const [center, setCenter] = useState(coords);
+  const [center, setCenter] = useState(coordsOakland);
   const onDrag = (event) => {
     setCenter(event.target.getCenter());
   }
-  useEffect(() => {
-    setCenter(coords);
-  }, [coords]);
+  // useEffect(() => {
+  //   setCenter(coords);
+  // }, [coords]);
 
   const [zoom, setZoom] = useState(initZoom);
   const onZoom = (event) => {
@@ -33,6 +33,7 @@ const Location = ({initZoom, coords, setStatus, setCoords }) => {
   }
 
   useEffect(() => {
+    console.log("getUserLocation...");
     getUserLocation().then(position => {
       setCenter({
         lat: position.coords.latitude,
@@ -40,6 +41,7 @@ const Location = ({initZoom, coords, setStatus, setCoords }) => {
       });
     });
   }, []);
+
   const saveLocation = () => {
     setCoords(center);
     setStatus(DETAILS);
