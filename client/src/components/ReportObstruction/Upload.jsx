@@ -1,12 +1,20 @@
 import React from "react";
 import Dropzone from "react-dropzone";
 import { LOCATION } from "../../constants/report";
+import { doUploadImage } from "./effects";
 
-const Upload = ({ uploadImage, setStatus }) => {
+const Upload = ({ setImgUrl, setStatus }) => {
   const onDrop = (files) => {
-    uploadImage(files[0]);
-    setStatus(LOCATION);
+    doUploadImage(files[0])
+    .then(url => {
+      setImgUrl(url);
+      setStatus(LOCATION);
+    })
+    .catch(err => {
+      console.error(err);
+    });
   }
+
   return (
     <Dropzone onDrop={onDrop}>
       {({getRootProps, getInputProps, isDragActive}) => {

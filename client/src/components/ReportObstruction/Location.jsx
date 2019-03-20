@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { DETAILS } from "../../constants/report";
+import { getUserLocation } from "./effects";
 
 const mapBottomOffset = 60;
 
-const Location = ({initZoom, coords, setStatus, setCoords, getLocation}) => {
+const Location = ({initZoom, coords, setStatus, setCoords }) => {
   // <Map> requires an absolute height
   const [height, setHeight] = useState(document.documentElement.clientHeight - mapBottomOffset);
   useEffect(() => {
@@ -32,7 +33,12 @@ const Location = ({initZoom, coords, setStatus, setCoords, getLocation}) => {
   }
 
   useEffect(() => {
-    getLocation();
+    getUserLocation().then(position => {
+      setCenter({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    });
   }, []);
   const saveLocation = () => {
     setCoords(center);

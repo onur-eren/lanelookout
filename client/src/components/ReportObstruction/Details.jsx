@@ -1,11 +1,25 @@
 import React from "react";
+import gql from "graphql-tag";
+import { Mutation } from "react-apollo";
 
-const Details = ({ image, coords, uploadReport }) => {
+// const CREATE_REPORT = gql`
+//   mutation createReport(
+//     $imgUrl: String!,
+//     $lat: Number,
+//     $lng: Number,
+//     $contact
+//   ) {
+//     createReport(imgUrl: $imgUrl ) {
+//         id
+//     }
+//   }
+// `;
+
+const Details = ({ imgUrl, coords }) => {
   return (
     <>
-      <p>image: {image}</p>
+      <p>imgUrl: {imgUrl}</p>
       <p>coords: [{coords.lat}, {coords.lng}]</p>
-      <p><button onClick={() => uploadReport()}>upload report</button></p>
     </>
   );
 };

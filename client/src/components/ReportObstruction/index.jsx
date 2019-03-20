@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   UPLOAD,
   LOCATION,
@@ -11,43 +11,34 @@ import Location from './Location';
 import Details from './Details';
 
 const ReportObstructionUI = (props) => {
-  const {
-    status,
-    image,
-    coords,
-    setStatus,
-    setCoords,
-    getLocation,
-    uploadImage,
-    uploadReport,
-  } = props;
+  const [status, setStatus] = useState(UPLOAD);
+  const [imgUrl, setImgUrl] = useState();
+  const [coords, setCoords] = useState();
 
   switch(status) {
     case UPLOAD:
       return <Upload
-        uploadImage={uploadImage}
+        setImgUrl={setImgUrl}
         setStatus={setStatus}
       />;
     case LOCATION:
       return <Location
+        setStatus={setStatus}
         initZoom={14}
         coords={coords}
-        setStatus={setStatus}
         setCoords={setCoords}
-        getLocation={getLocation}
       />;
     case DETAILS:
       return <Details
-        image={image}
+        imgUrl={imgUrl}
         coords={coords}
-        uploadReport={uploadReport}
       />;
     case SUBMISSION:
       return (<p>...</p>);
     case COMPLETE:
       return (<p>...</p>);
     default:
-      return null;    
+      return null;
   }
 };
 
