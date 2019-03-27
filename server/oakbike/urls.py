@@ -8,7 +8,7 @@ from .views import FrontendAppView, GraphQLView, LogView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=settings.GRAPHQL_DEBUG))),
-    path('gql', csrf_exempt(GraphQLView.as_view())),
+    path('gql/', csrf_exempt(GraphQLView.as_view())),
     path('log', csrf_exempt(LogView.as_view())),
     re_path(r'.*', FrontendAppView.as_view()),
 ]

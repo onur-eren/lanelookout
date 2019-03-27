@@ -29,8 +29,14 @@ class CreateReport(graphene.Mutation):
         contact = graphene.String(required=False)
         description = graphene.String(required=False)
 
-    def mutate(self, info, img_url, lat, lng, contact, description):
+    def mutate(self, info, **kwargs):
         r = Report.objects.create()
+        img_url = kwargs.get('img_url')
+        lat = kwargs.get('lat')
+        lng = kwargs.get('lng')
+        contact = kwargs.get('contact')
+        description = kwargs.get('description')
+
         if img_url:
             r.img_url = img_url
         if lat:
@@ -41,6 +47,7 @@ class CreateReport(graphene.Mutation):
             r.contact = contact
         if description:
             r.description = description
+
         r.save()
         return CreateReport(id=r.id)
 

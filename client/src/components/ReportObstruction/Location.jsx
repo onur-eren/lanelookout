@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { DETAILS, coordsOakland } from "../../constants/report";
 import { getUserLocation } from "./effects";
+import { Button, Container, Header } from 'semantic-ui-react'
 
 const mapBottomOffset = 60;
 
@@ -23,9 +24,6 @@ const Location = ({initZoom, coords, setStatus, setCoords }) => {
   const onDrag = (event) => {
     setCenter(event.target.getCenter());
   }
-  // useEffect(() => {
-  //   setCenter(coords);
-  // }, [coords]);
 
   const [zoom, setZoom] = useState(initZoom);
   const onZoom = (event) => {
@@ -62,7 +60,7 @@ const Location = ({initZoom, coords, setStatus, setCoords }) => {
         />
         <Marker position={center} />
       </Map>
-      <button onClick={saveLocation}>Save Location</button>
+        <Button color='red' fluid size='massive' onClick={saveLocation}>Save</Button>
     </>
   );
 };

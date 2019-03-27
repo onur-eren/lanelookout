@@ -9,9 +9,11 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import PageHome from "./components/PageHome";
 import Page404 from './components/Page404';
 import ReportObstruction from "./components/ReportObstruction";
+import 'semantic-ui-css/semantic.min.css'
 
+const gqlUrl = 'https://oakbike.herokuapp.com/gql';
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'https://oakbike.herokuapp.com/gql' }),
+  link: new HttpLink({ uri: process.env.NODE_ENV === "production" ? gqlUrl : "http://0.0.0.0:5000/gql/"}),
   cache: new InMemoryCache()
 });
 

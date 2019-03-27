@@ -1,7 +1,8 @@
 import React from "react";
 import Dropzone from "react-dropzone";
 import { LOCATION } from "../../constants/report";
-import { doUploadImage } from "./effects";
+import { doUploadImage } from "../../redux/report/effects";
+import { Button, Container, Header } from 'semantic-ui-react'
 
 const Upload = ({ setImgUrl, setStatus }) => {
   const onDrop = (files) => {
@@ -16,6 +17,8 @@ const Upload = ({ setImgUrl, setStatus }) => {
   }
 
   return (
+  <Container className="main-container">
+    <Header as='h1' textAlign="center">Report Obstruction</Header>
     <Dropzone onDrop={onDrop}>
       {({getRootProps, getInputProps, isDragActive}) => {
         return (
@@ -27,12 +30,13 @@ const Upload = ({ setImgUrl, setStatus }) => {
             {
               isDragActive ?
                 <p>Drop files here...</p> :
-                <p>Try dropping some files here, or click to select files to upload.</p>
+                <Button fluid size='massive'>Tap here to upload a photo</Button>
             }
           </div>
         )
       }}
     </Dropzone>
+  </Container>
   );
 };
 

@@ -1,27 +1,35 @@
 import React from "react";
 import gql from "graphql-tag";
-import { Mutation } from "react-apollo";
+import { graphql, Mutation } from "react-apollo";
 
-// const CREATE_REPORT = gql`
-//   mutation createReport(
-//     $imgUrl: String!,
-//     $lat: Number,
-//     $lng: Number,
-//     $contact
-//   ) {
-//     createReport(imgUrl: $imgUrl ) {
-//         id
-//     }
-//   }
-// `;
+const createReportMutation = gql`
+  mutation createReport($imgUrl: String, $lat: Float, $lng: Float, $contact: String, $description: String) {
+    createReport(imgUrl: $imgUrl, lat: $lat, lng: $lng, contact: $contact, description: $description) {
+        id
+    }
+  }
+`;
 
-const Details = ({ imgUrl, coords }) => {
-  return (
-    <>
-      <p>imgUrl: {imgUrl}</p>
-      <p>coords: [{coords.lat}, {coords.lng}]</p>
-    </>
-  );
-};
 
-export default Details;
+class Details extends React.Component {
+    componentDidMount = async () => {
+        let res = await this.props.createReportMutation({
+            variables: {
+                imgUrl: this.props.imgUrl,
+                lat: this.props.coords.lat,
+                lng: this.props.coords.lng,
+            },
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                Your report has been saved!
+            </div>
+        );
+    }
+}
+
+export default graphql(createReportMutation, { name: 'createReportMutation' })(Details)
+

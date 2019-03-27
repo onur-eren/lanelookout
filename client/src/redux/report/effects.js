@@ -3,12 +3,12 @@ import gql from "graphql-tag";
 
 
 const bucketUrl = 'https://s3-us-west-1.amazonaws.com/oak-bike/';
-
+/*
 const gqlUrl = 'https://oakbike.herokuapp.com/gql';
-
 const client = new ApolloClient({
-    uri: "http://0.0.0.0:5000/graphql/"
+    uri: process.env.NODE_ENV === "production" ? gqlUrl : "http://0.0.0.0:5000/graphql/"
 });
+*/
 
 const makeid = () => {
   let text = '';
@@ -39,6 +39,7 @@ export const doUploadImage = (image) => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
+/*
 export const doUploadReport = (report) => new Promise((resolve, reject) => {
   const options = { method: "POST", body: report };
   fetch(gqlUrl, options)
@@ -81,3 +82,4 @@ export const testGqlR = () => new Promise((resolve, reject) => {
         })
         .then(result => console.log(result));
 });
+*/

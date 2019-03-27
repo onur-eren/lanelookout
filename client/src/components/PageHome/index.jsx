@@ -1,46 +1,15 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import {
-  testGql,
-testGqlR
-} from "../../redux/report/effects";
 import { put, call, select, takeLatest } from "redux-saga/effects";
-var co = require('co');
-
-
-var fn = co.wrap(function* _testGql() {
-    try {
-        const result = yield call(testGql);
-        console.log(result)
-    } catch (error) {
-        // todo: error handling
-        console.error(`ERROR: ${error.message}`)
-    }
-}
-);
-
-var fn2 = co.wrap(function* _testGql() {
-    try {
-        const result = yield call(testGqlR);
-        console.log(result)
-    } catch (error) {
-        // todo: error handling
-        console.error(`ERROR: ${error.message}`)
-    }
-}
-);
+import { Button, Container, Header } from 'semantic-ui-react'
 
 const PageHome = () => (
-  <div>
-    <h1>Home Page</h1>
-    <ul>
-      <li><Link to="/report">Report Obstruction</Link></li>
-      <li><Link to="/nopers">Bad Link</Link></li>
-    </ul>
-    <a href="#" onClick={fn}>Test</a>
+  <Container className="main-container">
+    <Header as='h1' textAlign="center">Lane Lookout</Header>
+    <Button fluid as={Link} to="/report" size='massive'>Report Obstruction</Button>
     <br/>
-    <a href="#" onClick={fn2}>Test2</a>
-  </div>
+    <Button fluid as={Link} to="/nopers" size='massive'>View Reports</Button>
+  </Container>
 );
 
 export default PageHome;
