@@ -18,10 +18,9 @@ const client = new ApolloClient({
 });
 
 const App = () => {
-  const basename = process.env.NODE_ENV === 'production' ? '/oak-bike-client' : null;
   return (
     <ApolloProvider client={client}>
-      <Router basename={basename}>
+      <Router>
         <Switch>
           <Route exact path="/" component={PageHome} />
           <Route path="/report" component={ReportObstruction} />
