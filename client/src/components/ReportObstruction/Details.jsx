@@ -2,6 +2,9 @@ import React from "react";
 import gql from "graphql-tag";
 import { graphql, Mutation } from "react-apollo";
 import { UPLOAD } from "../../constants/report";
+import {
+  withRouter
+} from 'react-router-dom'
 
 const createReportMutation = gql`
   mutation createReport($imgUrl: String, $lat: Float, $lng: Float, $contact: String, $description: String) {
@@ -24,7 +27,7 @@ class Details extends React.Component {
 
         // Start counting when the page is loaded
          this.timeoutHandle = setTimeout(()=>{
-            this.props.setStatus(UPLOAD);
+           this.props.history.push('/')
          }, 3000);
     }
 
@@ -42,5 +45,5 @@ class Details extends React.Component {
     }
 }
 
-export default graphql(createReportMutation, { name: 'createReportMutation' })(Details)
+export default withRouter(graphql(createReportMutation, { name: 'createReportMutation' })(Details))
 
