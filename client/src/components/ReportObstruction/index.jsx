@@ -30,6 +30,7 @@ const ReportObstructionUI = (props) => {
       />;
     case DETAILS:
       return <Details
+        setStatus={setStatus}
         imgUrl={imgUrl}
         coords={coords}
       />;

@@ -1,6 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { graphql, Mutation } from "react-apollo";
+import { UPLOAD } from "../../constants/report";
 
 const createReportMutation = gql`
   mutation createReport($imgUrl: String, $lat: Float, $lng: Float, $contact: String, $description: String) {
@@ -20,10 +21,10 @@ class Details extends React.Component {
                 lng: this.props.coords.lng,
             },
         })
+
         // Start counting when the page is loaded
          this.timeoutHandle = setTimeout(()=>{
-            window.location.pathname = '/'
-
+            this.props.setStatus(UPLOAD);
          }, 3000);
     }
 
@@ -34,7 +35,7 @@ class Details extends React.Component {
     render() {
         return (
             <div>
-                Your report has been saved!
+                Your report has been saved! Stand by while we redirect you...
             </div>
 
         );
