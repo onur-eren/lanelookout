@@ -2,7 +2,6 @@
   "name": "oak-bike-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://traviseden.github.io/oak-bike-client",
   "dependencies": {
     "apollo-boost": "^0.3.1",
     "aws-s3": "^2.0.2",
