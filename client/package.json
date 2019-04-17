@@ -12,6 +12,15 @@
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "leaflet": "^1.4.0",
+    "lodash": "^4.17.11",
+    "lodash.filter": "^4.6.0",
+    "lodash.foreach": "^4.5.0",
+    "lodash.isnumber": "^3.0.3",
+    "lodash.map": "^4.6.0",
+    "lodash.max": "^4.0.1",
+    "lodash.min": "^4.0.1",
+    "lodash.pluck": "^3.1.2",
+    "lodash.reduce": "^4.6.0",
     "react": "^16.8.1",
     "react-apollo": "^2.5.2",
     "react-dom": "^16.8.1",
@@ -28,7 +37,8 @@
     "redux-saga": "^1.0.1",
     "reselect": "^4.0.0",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.86.0"
+    "semantic-ui-react": "^0.86.0",
+    "simpleheat": "^0.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
