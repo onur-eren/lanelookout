@@ -3,6 +3,8 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { DETAILS, coordsOakland } from "../../constants/report";
 import { Button, Container, Header } from 'semantic-ui-react'
 import HeatmapLayer from './HeatmapLayer';
+import { Link } from 'react-router-dom'
+
 
 export const points = [
 [37.81173258,-122.32513479],
@@ -52,6 +54,7 @@ const Heatmap = () => {
 
     return (
       <>
+      <Button fluid as={Link} to="/" size='massive'>Home</Button>
       <Map
         center={center}
         zoom={zoom}
