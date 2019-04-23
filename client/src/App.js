@@ -9,6 +9,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import PageHome from "./components/PageHome";
 import Page404 from './components/Page404';
 import ReportObstruction from "./components/ReportObstruction";
+import ViewReports from "./components/ViewReports";
 import 'semantic-ui-css/semantic.min.css'
 
 const gqlUrl = 'https://lanelookout.herokuapp.com/gql/';
@@ -24,6 +25,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={PageHome} />
           <Route path="/report" component={ReportObstruction} />
+          <Route path="/view_reports" component={ViewReports} />
           <Route path="/*" component={Page404} />
         </Switch>
       </Router>

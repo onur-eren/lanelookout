@@ -8,7 +8,7 @@ const PageHome = () => (
     <Header as='h1' textAlign="center">Lane Lookout</Header>
     <Button fluid as={Link} to="/report" size='massive'>Report Obstruction</Button>
     <br/>
-    <Button fluid as={Link} to="/nopers" size='massive'>View Reports</Button>
+    <Button fluid as={Link} to="/view_reports" size='massive'>View Reports</Button>
   </Container>
 );
 
