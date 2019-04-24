@@ -143,6 +143,9 @@ GRAPHENE = {
 }
 
 GRAPHQL_DEBUG = env('GRAPHQL_DEBUG', default=DEBUG)
+
+SECURE_SSL_REDIRECT = True
+
 django_heroku.settings(locals())
 
 # TODO - needs more investigation. For now:
