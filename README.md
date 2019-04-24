@@ -31,8 +31,12 @@ git push heroku master
 ```
 
 ## Authors
+* Manish Sinha (arithmetic@gmail.com)
+* Nikul Shah (nikulshah2@gmail.com)
+* Baker Renneckar (bakerrenneckar@gmail.com)
+
+## Alumni
 * Travis Eden
-* Manish Sinha
-* Nikul Shah
+
 
 
