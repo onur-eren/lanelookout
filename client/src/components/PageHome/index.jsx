@@ -11,7 +11,6 @@ const PageHome = () => (
     <Button fluid as={Link} to="/report" size='massive'>Report Obstruction</Button>
     <br/>
     <Button fluid as={Link} to="/view_reports" size='massive'>View Reports</Button>
-    <Header as="h4" textAlign="center"><a href="https://s3-us-west-1.amazonaws.com/oak-bike/ll_privacy_policy.pdf" target="_blank">Privacy policy</a></Header>
   </Container>
 );
 
