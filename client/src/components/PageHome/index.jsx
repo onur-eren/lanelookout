@@ -1,17 +1,85 @@
-import React from "react";
 import { Link } from 'react-router-dom'
 import { put, call, select, takeLatest } from "redux-saga/effects";
-import {  Button, Container, Header } from 'semantic-ui-react'
+import React, { useState, useEffect } from "react";
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import { DETAILS, coordsOakland } from "../../constants/report";
+import { Button, Container, Form, Header } from 'semantic-ui-react'
+import HeatmapLayer from './HeatmapLayer';
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 
-const PageHome = () => (
-  <Container className="main-container">
-    <Header as='h1' textAlign="center">Lane Lookout</Header>
-    <Header as='h4' textAlign="center">An app to help Oakland cyclist report obstructions in biking infastructure.</Header>
-    <br/>
-    <Button fluid as={Link} to="/report" size='massive'>Report Obstruction</Button>
-    <br/>
-    <Button fluid as={Link} to="/view_reports" size='massive'>View Reports</Button>
-  </Container>
-);
+const listReportsQuery = gql`
+  query {
+    listReports {
+        id
+        lat
+        lng
+    }
+  }
+`;
 
-export default PageHome;
+const mapBottomOffset = 218;
+const initZoom = 13;
+
+const Heatmap = ({ data: { loading, listReports} }) => {
+  // <Map> requires an absolute height
+  const [height, setHeight] = useState(document.documentElement.clientHeight - mapBottomOffset);
+  useEffect(() => {
+    const handleResize = () => {
+      setHeight(document.documentElement.clientHeight - mapBottomOffset);
+    }
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+
+  const [center, setCenter] = useState(coordsOakland);
+  const onDrag = (event) => {
+    setCenter(event.target.getCenter());
+  }
+
+  const [zoom, setZoom] = useState(initZoom);
+  const onZoom = (event) => {
+    setZoom(event.target.getZoom());
+  };
+
+
+    return (
+      <>
+      <Form loading={loading}>
+        <br/>
+        <Header as='h1' textAlign="center">Lane Lookout</Header>
+        <Header as='h4' textAlign="center">An app to help Oakland cyclist report obstructions in biking infastructure.</Header>
+        <br/>
+
+      </Form>
+          <Map
+            center={center}
+            zoom={zoom}
+            onDrag={onDrag}
+            onZoom={onZoom}
+            style={{ height }}
+          >
+              <HeatmapLayer
+                points={listReports && listReports.map(report => ([report.lat, report.lng]))}
+                longitudeExtractor={m => m[1]}
+                latitudeExtractor={m => m[0]}
+                intensityExtractor={m => parseFloat(m[2])}
+                radius={12}
+                />
+              <TileLayer
+                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+            </Map>
+
+        <Button fluid as={Link} to="/report" size='massive'>Report Obstruction</Button>
+
+      </>
+    );
+};
+
+export default graphql(listReportsQuery)(Heatmap)
+

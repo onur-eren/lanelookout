@@ -25,7 +25,6 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={PageHome} />
           <Route path="/report" component={ReportObstruction} />
-          <Route path="/view_reports" component={ViewReports} />
           <Route path="/*" component={Page404} />
         </Switch>
       </Router>
