@@ -18,7 +18,7 @@ const listReportsQuery = gql`
   }
 `;
 
-const mapBottomOffset = 200;
+const mapBottomOffset = 230;
 const initZoom = 13;
 
 const Heatmap = ({ data: { loading, listReports} }) => {
