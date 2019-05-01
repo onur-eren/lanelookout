@@ -18,7 +18,7 @@ const listReportsQuery = gql`
   }
 `;
 
-const mapBottomOffset = 218;
+const mapBottomOffset = 200;
 const initZoom = 13;
 
 const Heatmap = ({ data: { loading, listReports} }) => {
@@ -49,11 +49,9 @@ const Heatmap = ({ data: { loading, listReports} }) => {
     return (
       <>
       <Form loading={loading}>
-        <br/>
         <Header as='h1' textAlign="center">Lane Lookout</Header>
-        <Header as='h4' textAlign="center">An app to help Oakland cyclist report obstructions in biking infastructure.</Header>
+        <Header as='h4' textAlign="center">A non-for-profit app to help Oakland cyclists report obstructions in biking infastructure. Created by an <a href="https://openoakland.org" target="_blank">OpenOakland</a> group, a Code For America brigade.</Header>
         <br/>
-
       </Form>
           <Map
             center={center}
@@ -75,7 +73,7 @@ const Heatmap = ({ data: { loading, listReports} }) => {
               />
             </Map>
 
-        <Button fluid as={Link} to="/report" size='massive'>Report Obstruction</Button>
+        <Button color='red' fluid as={Link} to="/report" size='massive'>Report Obstruction</Button>
 
       </>
     );
