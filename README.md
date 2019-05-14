@@ -1,6 +1,6 @@
 # Lane Lookout
 
-![](https://i.imgur.com/y2yWHPb.png)
+<img src='https://i.imgur.com/y2yWHPb.png' style="height: 300px"/>
 
 Lane Lookout ([https://www.lanelookout.org](https://www.lanelookout.org])) is a web app to help cyclists report lane obstructions and violations. We take this data, aggregrate it, and send it to the relevant parking enforcement authorities so that cyclists can ride safe.
 
