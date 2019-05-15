@@ -50,7 +50,7 @@ const Heatmap = ({ data: { loading, listReports} }) => {
       <>
       <Form loading={loading}>
         <Header as='h1' textAlign="center">Lane Lookout</Header>
-        <Header as='h4' textAlign="center">A non-for-profit app to help Oakland cyclists report obstructions in biking infastructure. Created by an <a href="https://openoakland.org" target="_blank">OpenOakland</a> group, a Code For America brigade.</Header>
+        <Header as='h4' textAlign="center">A non-profit app to help Oakland cyclists report obstructions in biking infastructure. Created by an <a href="https://openoakland.org" target="_blank">OpenOakland</a> group, a Code For America brigade.</Header>
         <br/>
       </Form>
           <Map
