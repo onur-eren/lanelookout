@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 // import { Provider } from "react-redux";
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from "apollo-client";
@@ -11,6 +11,10 @@ import Page404 from './components/Page404';
 import ReportObstruction from "./components/ReportObstruction";
 import ViewReports from "./components/ViewReports";
 import 'semantic-ui-css/semantic.min.css'
+import ReactGA from 'react-ga';
+import createHistory from 'history/createBrowserHistory'
+
+ReactGA.initialize("UA-140241188-1");
 
 const gqlUrl = 'https://lanelookout.herokuapp.com/gql/';
 const client = new ApolloClient({
@@ -18,10 +22,16 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
+const history = createHistory()
+history.listen((location, action) => {
+  ReactGA.set({ page: location.pathname });
+  ReactGA.pageview(location.pathname);
+});
+
 const App = () => {
   return (
     <ApolloProvider client={client}>
-      <Router>
+      <Router history={history}>
         <Switch>
           <Route exact path="/" component={PageHome} />
           <Route path="/report" component={ReportObstruction} />
