@@ -18,7 +18,7 @@ const listReportsQuery = gql`
   }
 `;
 
-const mapBottomOffset = 230;
+const mapBottomOffset = 198;
 const initZoom = 13;
 
 const Heatmap = ({ data: { loading, listReports} }) => {
@@ -47,11 +47,13 @@ const Heatmap = ({ data: { loading, listReports} }) => {
 
 
     return (
-      <>
-      <Form loading={loading}>
-        <Header as='h1' textAlign="center">Lane Lookout</Header>
-        <Header as='h4' textAlign="center">A non-profit app to help Oakland cyclists report obstructions in biking infastructure. Created by an <a href="https://openoakland.org" target="_blank">OpenOakland</a> group, a Code For America brigade.</Header>
-        <br/>
+  <div className="home-container">
+      <Form className="home-top" loading={loading}>
+        <Header as='h1' textAlign="center" className="home-header">LaneLookout</Header>
+        <Header as='h4' textAlign="center" className="home-sub-header">A non-profit app to help Oakland cyclists report obstructions in biking infastructure. Created by an <a href="https://openoakland.org" target="_blank">OpenOakland</a> group, a Code For America brigade. </Header>
+        <div className="home-links">
+            <Link to='/mission'>Mission</Link> | <Link to='/about'>About</Link> | <a href="https://oak-bike.s3-us-west-1.amazonaws.com/LaneLookout+Privacy+Notice.pdf" target="_blank">Privacy policy</a> | <a href="https://github.com/lanelookout/lanelookout" target="_blank">Source code</a>
+        </div>
       </Form>
           <Map
             center={center}
@@ -75,7 +77,7 @@ const Heatmap = ({ data: { loading, listReports} }) => {
 
         <Button color='red' fluid as={Link} to="/report" size='massive'>Report Obstruction</Button>
 
-      </>
+      </div>
     );
 };
 

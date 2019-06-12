@@ -21,3 +21,19 @@ code {
 .root {
     height: 100%;
 }
+
+.home-top {
+    height: 120px;
+}
+
+.home-container {
+    padding-top: 20px;
+}
+
+.home-links {
+    text-align: center;
+}
+
+.home-sub-header {
+    margin-top: 0px !important;
+}

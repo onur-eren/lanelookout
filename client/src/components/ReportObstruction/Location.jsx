@@ -4,7 +4,7 @@ import { DETAILS, coordsOakland } from "../../constants/report";
 import { getUserLocation } from "./effects";
 import { Button, Container, Header } from 'semantic-ui-react'
 
-const mapBottomOffset = 60;
+const mapBottomOffset = 62;
 
 const Location = ({initZoom, coords, setStatus, setCoords }) => {
   // <Map> requires an absolute height
