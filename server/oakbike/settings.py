@@ -21,6 +21,7 @@ DEBUG = env('DJANGO_DEBUG', default=False)
 
 ALLOWED_HOSTS = []
 CORS_ORIGIN_WHITELIST = [
+    'https://lanelookout.org',
     'http://localhost:3000'
 ]
 # CORS_ORIGIN_ALLOW_ALL = True
