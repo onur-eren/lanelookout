@@ -31,6 +31,11 @@ export const handleImageUpload = (image) => ({
   payload: image,
 });
 
+export const setObstructionType = (type) => ({
+  type: SET_OBSTRUCTION_TYPE,
+  payload: radio,
+});
+
 export const handleReportUpload = (report) => ({
   type: HANDLE_REPORT_UPLOAD,
   payload: report,
