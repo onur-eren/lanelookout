@@ -24,7 +24,7 @@ export const setReportCoords = (coords) => ({
 
 export const getUserLocation = () => ({
   type: GET_USER_LOCATION,
-});
+}); 
 
 export const handleImageUpload = (image) => ({
   type: HANDLE_IMAGE_UPLOAD,
