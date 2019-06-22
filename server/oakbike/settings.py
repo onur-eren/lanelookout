@@ -20,12 +20,11 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DJANGO_DEBUG', default=False)
 
 ALLOWED_HOSTS = []
-"""
-CORS_ORIGIN_WHITELIST = (
-    'localhost:3000',
-)
-"""
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+    'https://www.lanelookout.org',
+    'http://localhost:3000'
+]
+# CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -144,7 +143,8 @@ GRAPHENE = {
 
 GRAPHQL_DEBUG = env('GRAPHQL_DEBUG', default=DEBUG)
 
-SECURE_SSL_REDIRECT = True
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
 
 django_heroku.settings(locals())
 
