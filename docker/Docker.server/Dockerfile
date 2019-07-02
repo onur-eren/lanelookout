@@ -22,15 +22,15 @@ RUN rm /etc/supervisor/supervisord.conf && \
     mkdir -p /var/log/supervisor && \
     mkdir -p /var/log/gunicorn && \
     mkdir -p /code/logs/supervisord
-
-ADD server /code
-ADD .env /code
-ADD docker /code
-
+    
 # Install python requirements
 # TODO: don't pass --dev in production
 ADD Pipfile Pipfile.lock /code/
 RUN pipenv install --system --deploy --ignore-pipfile --dev
+
+ADD server /code
+ADD .env /code
+ADD docker /code
 
 RUN groupadd -r app -g 1000 && \
     useradd -u 1000 -r -g app -d /code -s /bin/bash -c "Docker image user" app
