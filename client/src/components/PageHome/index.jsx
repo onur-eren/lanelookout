@@ -52,7 +52,7 @@ const Heatmap = ({ data: { loading, listReports} }) => {
         <Header as='h1' textAlign="center" className="home-header">LaneLookout</Header>
         <Header as='h4' textAlign="center" className="home-sub-header">A non-profit app to help Oakland cyclists report obstructions in biking infastructure. Created by an <a href="https://openoakland.org" target="_blank">OpenOakland</a> group, a Code For America brigade. </Header>
         <div className="home-links">
-            <Link to='/mission'>Mission</Link> | <Link to='/about'>About</Link> | <a href="https://oak-bike.s3-us-west-1.amazonaws.com/LaneLookout+Privacy+Notice.pdf" target="_blank">Privacy policy</a> | <a href="https://github.com/lanelookout/lanelookout" target="_blank">Source code</a>
+            <Link to='/about'>About</Link> | <a href="https://oak-bike.s3-us-west-1.amazonaws.com/LaneLookout+Privacy+Notice.pdf" target="_blank">Privacy Notice</a> | <a href="https://github.com/lanelookout/lanelookout" target="_blank">Source code</a> | <a href="https://www.gofundme.com/lanelookout" target="_blank">Support</a>
         </div>
       </Form>
           <Map
