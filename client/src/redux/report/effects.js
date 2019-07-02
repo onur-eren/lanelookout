@@ -31,7 +31,7 @@ export const doUploadImage = (image) => new Promise((resolve, reject) => {
   const type = image.type.split('/')[1];
   const fileName = `${makeid()}.${type}`
   const formData = new FormData();
-  formData.append('key', fileName);
+  formData.append('key', 'bike/'+fileName);
   formData.append('file', image);
   const options = { method: "POST", body: formData };
   fetch(bucketUrl, options)
