@@ -24,7 +24,7 @@ yarn-error.log*
 .env
 
 # Compiled stuff
-server/static
+server/staticfiles
 *.pyc
 __pycache__
 .pytest_cache

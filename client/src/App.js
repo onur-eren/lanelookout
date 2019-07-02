@@ -20,7 +20,7 @@ ReactGA.initialize("UA-140241188-1");
 
 const gqlUrl = 'https://lanelookout.herokuapp.com/gql/';
 const client = new ApolloClient({
-  link: new HttpLink({ uri: process.env.NODE_ENV === "production" ? gqlUrl : "http://0.0.0.0:5000/gql/"}),
+  link: new HttpLink({ uri: process.env.NODE_ENV === "production" ? gqlUrl : "http://http://192.168.99.100:5000/gql/"}),
   cache: new InMemoryCache()
 });
 
