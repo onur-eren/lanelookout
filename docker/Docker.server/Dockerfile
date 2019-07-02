@@ -28,9 +28,9 @@ RUN rm /etc/supervisor/supervisord.conf && \
 ADD Pipfile Pipfile.lock /code/
 RUN pipenv install --system --deploy --ignore-pipfile --dev
 
-ADD server /code
-ADD .env /code
-ADD docker /code
+ADD ./server /code/server
+ADD ./.env /code/
+ADD ./docker /code/docker
 
 RUN groupadd -r app -g 1000 && \
     useradd -u 1000 -r -g app -d /code -s /bin/bash -c "Docker image user" app
