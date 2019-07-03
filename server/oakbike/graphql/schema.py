@@ -15,19 +15,21 @@ class ReportType(DjangoObjectType):
             'lng',
             'contact',
             'description',
-            'date_created'
+            'date_created',
+            'source'
         )
 
 
 class CreateReport(graphene.Mutation):
     id = graphene.UUID()
-  
+
     class Arguments:
         img_url = graphene.String(required=False)
         lat = graphene.Float(required=False)
         lng = graphene.Float(required=False)
         contact = graphene.String(required=False)
         description = graphene.String(required=False)
+        source = graphene.String(required=False)
 
     def mutate(self, info, **kwargs):
         r = Report.objects.create()
@@ -36,6 +38,7 @@ class CreateReport(graphene.Mutation):
         lng = kwargs.get('lng')
         contact = kwargs.get('contact')
         description = kwargs.get('description')
+        source = kwargs.get('source')
 
         if img_url:
             r.img_url = img_url
@@ -47,6 +50,8 @@ class CreateReport(graphene.Mutation):
             r.contact = contact
         if description:
             r.description = description
+        if source:
+            r.source = source
 
         r.save()
         return CreateReport(id=r.id)

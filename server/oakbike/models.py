@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.utils.timezone import now
 
 
 class Report(models.Model):
@@ -10,4 +11,5 @@ class Report(models.Model):
     contact = models.CharField(max_length=256, blank=True)
     description = models.CharField(max_length=512, blank=True)
     img_url = models.CharField(max_length=256, blank=True)
-    date_created = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(default=now)
+    source = models.CharField(max_length=256, blank=True)
