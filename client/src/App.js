@@ -9,7 +9,6 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import PageHome from "./components/PageHome";
 import Page404 from './components/Page404';
 import About from './components/About';
-import Mission from './components/Mission';
 import ReportObstruction from "./components/ReportObstruction";
 import ViewReports from "./components/ViewReports";
 import 'semantic-ui-css/semantic.min.css'
@@ -37,7 +36,6 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={PageHome} />
           <Route path="/about" component={About} />
-          <Route path="/mission" component={Mission} />
           <Route path="/report" component={ReportObstruction} />
           <Route path="/*" component={Page404} />
         </Switch>
