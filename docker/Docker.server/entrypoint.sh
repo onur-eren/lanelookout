@@ -10,7 +10,29 @@ function migrate {
     fi
     python manage.py migrate
 }
-
+function createSuperUser {
+python3 -c"import cmd;
+import os;
+import sys;
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'oakbike.settings');
+from django.core.management import execute_from_command_line;
+import django;
+django.setup();
+from django.contrib.auth.management.commands.createsuperuser import get_user_model;
+User = get_user_model();
+if User.objects.count()>0:
+    print('\n======> Superuser Exist.\n')
+else:
+    print('\n======> Superuser creating...\n');
+    User.objects.create_superuser(username='${DJUSERNAME}',email='${DJEMAIL}',password='${DJPASSWORD}');
+    if User.objects.count()>0:
+        print('\n======> Superuser created.\n');
+    else:
+        print('\n======> Superuser Creation Failed.\n');
+">&2
+    # python3 createsuperuser.py
+    # python3 manage.py createsuperuser --database db --username weaktiger --email onurerenytu@yahoo.com
+}
 function mockdata {
     :
 }
@@ -29,6 +51,7 @@ function supervisor {
 
 function development {
     migrate
+    createSuperUser
     mockdata
     assets
     supervisor

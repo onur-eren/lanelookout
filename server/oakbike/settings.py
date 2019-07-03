@@ -19,12 +19,14 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DJANGO_DEBUG', default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.99.100'
+]
 CORS_ORIGIN_WHITELIST = [
     'https://www.lanelookout.org',
     'http://localhost:3000'
 ]
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -122,7 +124,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/code/server/static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# STATIC_ROOT = '/code/server/static'
 
 REACT_APP_DIR = os.path.join('client')
 if not DEBUG:
@@ -144,10 +147,12 @@ GRAPHENE = {
 GRAPHQL_DEBUG = env('GRAPHQL_DEBUG', default=DEBUG)
 
 if not DEBUG:
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = False
+DEBUG = env('HEROKU_DEPLOY', default=False)
 
-django_heroku.settings(locals())
+if "HEROKU_DEPLOY" in os.environ and env('HEROKU_DEPLOY', default=False):   
+    django_heroku.settings(locals())
 
 # TODO - needs more investigation. For now:
 # https://github.com/kennethreitz/dj-database-url/issues/107
-del DATABASES['default']['OPTIONS']['sslmode']
+# del DATABASES['default']['OPTIONS']['sslmode']

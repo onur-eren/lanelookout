@@ -14,8 +14,8 @@ services:
     image: oak-bike
     env_file: .env
     container_name: oak-bike
-    volumes:
-      - .:/code
+    # volumes:
+    #   - .:/code
     ports:
       - "5000:5000"
     depends_on:
