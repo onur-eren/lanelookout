@@ -24,11 +24,16 @@ export const setReportCoords = (coords) => ({
 
 export const getUserLocation = () => ({
   type: GET_USER_LOCATION,
-});
+}); 
 
 export const handleImageUpload = (image) => ({
   type: HANDLE_IMAGE_UPLOAD,
   payload: image,
+});
+
+export const setObstructionType = (type) => ({
+  type: SET_OBSTRUCTION_TYPE,
+  payload: radio,
 });
 
 export const handleReportUpload = (report) => ({
