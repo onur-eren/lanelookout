@@ -11,3 +11,6 @@ class Report(models.Model):
     description = models.CharField(max_length=512, blank=True)
     img_url = models.CharField(max_length=256, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.description
