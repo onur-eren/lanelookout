@@ -15,6 +15,8 @@ django-cors-headers = "*"
 gunicorn = "*"
 django-environ = "*"
 django-heroku = "*"
+requests = "*"
+pytz = "*"
 
 [dev-packages]
 pytest-django = "==3.3.2"
