@@ -16,7 +16,9 @@ class ReportType(DjangoObjectType):
             'contact',
             'description',
             'date_created',
-            'source'
+            'source',
+            'report_type'
+
         )
 
 
@@ -29,6 +31,7 @@ class CreateReport(graphene.Mutation):
         lng = graphene.Float(required=False)
         contact = graphene.String(required=False)
         description = graphene.String(required=False)
+        report_type = graphene.String(required=False)
         source = graphene.String(required=False)
 
     def mutate(self, info, **kwargs):
@@ -52,6 +55,8 @@ class CreateReport(graphene.Mutation):
             r.description = description
         if source:
             r.source = source
+        if report_type:
+            r.report_type = report_type
 
         r.save()
         return CreateReport(id=r.id)
