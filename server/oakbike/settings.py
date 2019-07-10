@@ -122,7 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/code/server/static'
+STATIC_ROOT = '/code/server/staticfolder'
 
 REACT_APP_DIR = os.path.join('client')
 if not DEBUG:
@@ -141,13 +141,11 @@ GRAPHENE = {
     'RELAY_CONNECTION_MAX_LIMIT': 50,
 }
 
-GRAPHQL_DEBUG = env('GRAPHQL_DEBUG', default=DEBUG)
-
+GRAPHQL_DEBUG = env('GRAPHQL_DEBUG', default=DEBUG)    
 if not DEBUG:
+    django_heroku.settings(locals())
+    del DATABASES['default']['OPTIONS']['sslmode'] 
     SECURE_SSL_REDIRECT = True
-
-django_heroku.settings(locals())
 
 # TODO - needs more investigation. For now:
 # https://github.com/kennethreitz/dj-database-url/issues/107
-del DATABASES['default']['OPTIONS']['sslmode']
