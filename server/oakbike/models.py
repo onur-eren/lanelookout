@@ -21,6 +21,5 @@ class Report(models.Model):
     description = models.CharField(max_length=512, blank=True)
     img_url = models.CharField(max_length=256, blank=True)
     date_created = models.DateTimeField(default=now)
+    report_type = models.CharField(max_length=3, blank=True)
     source = models.CharField(max_length=256, blank=True)
-    report_type = models.CharField(
-        max_length=1, blank=True, choices=REPORT_TYPES)

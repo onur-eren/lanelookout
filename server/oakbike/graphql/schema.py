@@ -31,7 +31,7 @@ class CreateReport(graphene.Mutation):
         lng = graphene.Float(required=False)
         contact = graphene.String(required=False)
         description = graphene.String(required=False)
-        report_type = graphene.String(required=False)
+        reporttype = graphene.String(required=False)
         source = graphene.String(required=False)
 
     def mutate(self, info, **kwargs):
@@ -41,6 +41,7 @@ class CreateReport(graphene.Mutation):
         lng = kwargs.get('lng')
         contact = kwargs.get('contact')
         description = kwargs.get('description')
+        report_type = kwargs.get('reporttype')
         source = kwargs.get('source')
 
         if img_url:
@@ -53,10 +54,10 @@ class CreateReport(graphene.Mutation):
             r.contact = contact
         if description:
             r.description = description
-        if source:
-            r.source = source
         if report_type:
             r.report_type = report_type
+        if source:
+            r.source = source
 
         r.save()
         return CreateReport(id=r.id)

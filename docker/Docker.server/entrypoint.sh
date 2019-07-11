@@ -8,6 +8,7 @@ function migrate {
     else
         psql -h db -U postgres -c "CREATE DATABASE ${POSTGRES_GM_DB}"
     fi
+    python manage.py makemigrations oakbike
     python manage.py migrate
 }
 
