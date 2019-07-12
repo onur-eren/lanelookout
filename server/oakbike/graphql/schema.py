@@ -24,6 +24,7 @@ class ReportType(DjangoObjectType):
 
 class CreateReport(graphene.Mutation):
     id = graphene.UUID()
+    img_url = graphene.String()
 
     class Arguments:
         img_url = graphene.String(required=False)
@@ -60,7 +61,7 @@ class CreateReport(graphene.Mutation):
             r.source = source
 
         r.save()
-        return CreateReport(id=r.id)
+        return CreateReport(id=r.id,img_url=r.img_url)
 
 
 class Query(graphene.ObjectType):

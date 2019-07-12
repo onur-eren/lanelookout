@@ -10,7 +10,6 @@ const Upload = ({ setImgUrl, setStatus }) => {
     doUploadImage(files[0])
     .then(url => {
       setImgUrl(url);
-      setStatus(LOCATION);
     })
     .catch(err => {
       console.error(err);

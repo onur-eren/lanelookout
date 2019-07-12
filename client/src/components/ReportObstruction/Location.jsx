@@ -3,18 +3,22 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { DETAILS, coordsOakland } from "../../constants/report";
 import { getUserLocation } from "./effects";
 import { Container, Header } from 'semantic-ui-react'
+import HeatmapLayer from '../PageHome/HeatmapLayer';
 
-const Location = ({ initZoom, setStatus, setCoords, coords }) => {
+const Location = ({ setZoom,zoom, setStatus, setCoords, coords }) => {
   // <Map> requires an absolute height
   const [height, setHeight] = useState(document.documentElement.clientHeight);
   const [center, setCenter] = useState(coordsOakland);
-  const [zoom, setZoom] = useState(initZoom);
 
   // DRAG EVENT
   const onDrag = (event) => {
     setCenter(event.target.getCenter());
     setCoords(center);
-
+  } 
+  // CLICK EVENT
+  const onClick = (event) => {
+    setCenter(event.latlng);
+    setCoords(center);
   }
 
   // ZOOM EVENTS
@@ -58,24 +62,23 @@ const Location = ({ initZoom, setStatus, setCoords, coords }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
   // RETURN
   return (
-    <>
       <Map
         center={center}
         zoom={zoom}
         onDrag={onDrag}
+        onClick={onClick}
         onZoom={onZoom}
         style={{ height }}
       >
+         
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Marker position={center} />
       </Map>
-    </>
   );
 };
 
