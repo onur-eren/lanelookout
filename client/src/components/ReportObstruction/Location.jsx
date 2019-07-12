@@ -4,64 +4,62 @@ import { DETAILS, coordsOakland } from "../../constants/report";
 import { getUserLocation } from "./effects";
 import { Container, Header } from 'semantic-ui-react'
 
-const mapBottomOffset = 0;
 const Location = ({ initZoom, setStatus, setCoords, coords }) => {
   // <Map> requires an absolute height
-  const [height, setHeight] = useState(document.documentElement.clientHeight - mapBottomOffset);
-  useEffect(() => {
-    const handleResize = () => {
-      setHeight(document.documentElement.clientHeight - mapBottomOffset);
-    }
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    }
-  }, []);
-
+  const [height, setHeight] = useState(document.documentElement.clientHeight);
   const [center, setCenter] = useState(coordsOakland);
+  const [zoom, setZoom] = useState(initZoom);
+
+  // DRAG EVENT
   const onDrag = (event) => {
     setCenter(event.target.getCenter());
     setCoords(center);
 
   }
 
-  const [zoom, setZoom] = useState(initZoom);
+  // ZOOM EVENTS
   const onZoom = (event) => {
     setZoom(event.target.getZoom());
   }
-  const centerMapOnCoords = () => {
-    console.log("coords...");
-    setCenter({
-      lat: Number(coords.lat),
-      lng: Number(coords.lng),
-    });
-  };
-  
-  const centerMapOnLocation = () => {
-    console.log("getUserLocation...");
-    getUserLocation().then(position => {
-      setCenter({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      });
-      setCoords(center);
-    });
-  };
 
-  useEffect(() => {
-    if (coords !== undefined) {
-      centerMapOnCoords();
+  // SET DEFAULT CENTER
+  const setDefaultCenter = () => {
+    if (coords.lat !== null) {
+      setCenter({
+        lat: Number(coords.lat),
+        lng: Number(coords.lng),
+      });
       return;
     }
-    centerMapOnLocation();
+    else {
+      getUserLocation().then(position => {
+        setCenter({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+        setCoords(center);
+      });
+    }
+  };
+
+  // RESIZE EVENT
+  const handleResize = () => {
+    setHeight(document.documentElement.clientHeight);
+  }
+  // called on componentDidMount & componentDidUpdate
+  useEffect(() => {
+    setDefaultCenter();
+    handleResize();
+    // ADD EVENT Listeners
+    window.addEventListener("resize", handleResize);
+    // componentWillUnmount 
+    return () => {
+      console.log("Cleaned up");
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  // const saveLocation = () => {
-  //   setCoords(center);
-  //   setStatus(DETAILS);
-  // };
-
+  // RETURN
   return (
     <>
       <Map

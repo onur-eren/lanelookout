@@ -1,7 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { graphql, Mutation } from "react-apollo";
-import { LOCATION } from "../../constants/report";
+import { FORM } from "../../constants/report";
 import {
   withRouter
 } from 'react-router-dom'
@@ -18,7 +18,7 @@ const createReportMutation = gql`
 class Details extends React.Component {
   componentDidMount = async () => {
     console.log(this.props.imgUrl);
-    console.log(this.props.coords.lat);
+    console.log(this.props.coords.lat+ ', '+this.props.coords.lng);
     console.log(this.props.reportType);
     try {
       let res = await this.props.createReportMutation({
@@ -39,7 +39,7 @@ class Details extends React.Component {
     this.timeoutHandle = setTimeout(() => {
       // this.props.history.push('/')
       this.props.setZoom(19);
-      this.props.setStatus(LOCATION);
+      this.props.setStatus(FORM);
     }, 3000);
   }
 
@@ -57,5 +57,5 @@ class Details extends React.Component {
   }
 }
 
-export default withRouter(graphql(createReportMutation, { name: 'createReportMutation' })(Details))
+export default Details
 

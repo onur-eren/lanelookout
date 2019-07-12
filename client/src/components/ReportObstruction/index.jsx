@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-import {
-  UPLOAD,
-  LOCATION,
-  DETAILS,
-  SUBMISSION,
-  COMPLETE,
-} from "../../constants/report";
+import {FORM, SUBMISSION, COMPLETE} from "../../constants/report";
 import Upload from './Upload';
 import Location from './Location';
-import Details from './Details';
+// import Details from './Details';
 import ReportType from './ReportType';
 import { Button, Header, Container } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import gql from "graphql-tag";
+import { Mutation } from "react-apollo";
 
 const ReportObstructionUI = (props) => {
-  const [status, setStatus] = useState(LOCATION);
+  const [status, setStatus] = useState(FORM);
   const [imgUrl, setImgUrl] = useState('demo.png');
-  const [coords, setCoords] = useState();
+  const [coords, setCoords] = useState({lat:null,lng:null});
   const [zoom, setZoom] = useState(14);
   const [reportType, setReportType] = useState();
 
@@ -32,46 +28,57 @@ const ReportObstructionUI = (props) => {
     alignItems: "center"
   };
   const savereport = () => {
-    setStatus(DETAILS);
+    setStatus(SUBMISSION);
   }
+  const ADDREPORT = gql`
+  mutation createReport($imgUrl: String, $lat: Float, $lng: Float, $contact: String, $description: String, $reporttype: String) {
+    createReport(imgUrl: $imgUrl, lat: $lat, lng: $lng, contact: $contact, description: $description, reporttype: $reporttype) {
+        id
+    }
+  }
+`;
 
   switch (status) {
-    case LOCATION:
+    case FORM:
       return <>
-        <Container style={fixTop}>
-          <Header as='h1' textAlign="center">Report Obstruction</Header>
-          <Button color='orange' fluid as={Link} to="/" size='huge'>Home</Button>
-          <br />
-          <Upload
-            setImgUrl={setImgUrl}
-            setStatus={setStatus}
+      <Container style={fixTop}>
+        <Header as='h1' textAlign="center">Report Obstruction</Header>
+        <Button color='orange' fluid as={Link} to="/" size='huge'>Home</Button>
+        <br />
+        <Upload
+          setImgUrl={setImgUrl}
+          setStatus={setStatus}
+        />
+        <br />
+          <ReportType
+            reportType={reportType}
+            setReportType={setReportType}
           />
           <br />
-            <ReportType
-              reportType={reportType}
-              setReportType={setReportType}
-            />
-            <br />
-          <Button color='red' fluid size='huge' onClick={savereport}>Save</Button>
-        </Container>
-
-        
-    <Location
-          initZoom={zoom}
-          setCoords={setCoords}
-          coords={coords}
-        />
-      </>;
-    case DETAILS:
-      return <Details
-      setStatus={setStatus}
-      setZoom={setZoom}
-        imgUrl={imgUrl}
-        coords={coords}
-        reportType={reportType}
-      />;
-    case SUBMISSION:
-      return (<p>sad</p>);
+        {/* <Button color='red' fluid size='huge' onClick={savereport}>Save</Button> */}
+      </Container>
+      <Location
+            initZoom={zoom}
+            setCoords={setCoords}
+            coords={coords}
+          />
+      <Mutation mutation={ADDREPORT} variables={{ 
+          imgUrl: imgUrl,
+          lat: coords.lat,
+          lng: coords.lng,
+          reporttype: reportType
+      }}>
+        {createReport =>  <button onClick={createReport}>Submit</button>}
+      </Mutation>
+        </>;
+    // case SUBMISSION:
+    //   return <Details
+    //     setStatus={setStatus}
+    //     setZoom={setZoom}
+    //     imgUrl={imgUrl}
+    //     coords={coords}
+    //     reportType={reportType}
+    //   />;
     case COMPLETE:
       return (<p>...</p>);
     default:
