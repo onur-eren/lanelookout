@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Map, Marker, TileLayer } from 'react-leaflet'
 import { coordsOakland } from "../../constants/report";
-import { getUserLocation } from "./effects";
 
-const Location = ({ setZoom,zoom, setStatus, setCoords, coords }) => {
+const Location = ({ zoom, setCoords, coords }) => {
   // <Map> requires an absolute height
   const [height, setHeight] = useState(document.documentElement.clientHeight);
   const [center, setCenter] = useState(coordsOakland);
@@ -16,33 +15,10 @@ const Location = ({ setZoom,zoom, setStatus, setCoords, coords }) => {
   // CLICK EVENT
   const onClick = (event) => {
     setCenter(event.latlng);
-    setCoords(center);
+    setCoords(event.latlng);
   }
 
-  // ZOOM EVENTS
-  const onZoom = (event) => {
-    setZoom(event.target.getZoom());
-  }
-
-  // SET DEFAULT CENTER
-  const setDefaultCenter = () => {
-    if (coords.lat !== null) {
-      setCenter({
-        lat: Number(coords.lat),
-        lng: Number(coords.lng),
-      });
-      return;
-    }
-    else {
-      getUserLocation().then(position => {
-        setCenter({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-        setCoords(center);
-      });
-    }
-  };
+  
 
   // RESIZE EVENT
   const handleResize = () => {
@@ -50,7 +26,6 @@ const Location = ({ setZoom,zoom, setStatus, setCoords, coords }) => {
   }
   // called on componentDidMount & componentDidUpdate
   useEffect(() => {
-    setDefaultCenter();
     handleResize();
     // ADD EVENT Listeners
     window.addEventListener("resize", handleResize);
@@ -65,10 +40,9 @@ const Location = ({ setZoom,zoom, setStatus, setCoords, coords }) => {
       <Map
         center={center}
         zoom={zoom}
+        style={{ height }}
         onDrag={onDrag}
         onClick={onClick}
-        onZoom={onZoom}
-        style={{ height }}
       >
          
         <TileLayer
