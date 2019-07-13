@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
-import { DETAILS, coordsOakland } from "../../constants/report";
+import { Map, Marker, TileLayer } from 'react-leaflet'
+import { coordsOakland } from "../../constants/report";
 import { getUserLocation } from "./effects";
-import { Container, Header } from 'semantic-ui-react'
-import HeatmapLayer from '../PageHome/HeatmapLayer';
 
 const Location = ({ setZoom,zoom, setStatus, setCoords, coords }) => {
   // <Map> requires an absolute height

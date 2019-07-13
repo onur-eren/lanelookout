@@ -1,5 +1,4 @@
-import ApolloClient from "apollo-boost";
-import gql from "graphql-tag";
+
 
 
 const bucketUrl = 'https://s3-us-west-1.amazonaws.com/oe-bike/';

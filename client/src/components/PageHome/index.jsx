@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom'
-import { put, call, select, takeLatest } from "redux-saga/effects";
 import React, { useState, useEffect } from "react";
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
-import { DETAILS, coordsOakland } from "../../constants/report";
-import { Button, Container, Form, Header } from 'semantic-ui-react'
+import { Map, TileLayer } from 'react-leaflet'
+import {  coordsOakland } from "../../constants/report";
+import { Button, Form, Header } from 'semantic-ui-react'
 import HeatmapLayer from './HeatmapLayer';
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
@@ -50,9 +49,9 @@ const Heatmap = ({ data: { loading, listReports } }) => {
     <div className="home-container">
       <Form className="home-top" loading={loading}>
         <Header as='h1' textAlign="center" className="home-header">LaneLookout</Header>
-        <Header as='h4' textAlign="center" className="home-sub-header">A non-profit app to help Oakland cyclists report obstructions in biking infastructure. Created by an <a href="https://openoakland.org" target="_blank">OpenOakland</a> group, a Code For America brigade. </Header>
+        <Header as='h4' textAlign="center" className="home-sub-header">A non-profit app to help Oakland cyclists report obstructions in biking infastructure. Created by an <a href="https://openoakland.org" target="_blank" rel="noopener noreferrer">OpenOakland</a> group, a Code For America brigade. </Header>
         <div className="home-links">
-          <Link to='/about'>About</Link> | <a href="https://oak-bike.s3-us-west-1.amazonaws.com/LaneLookout+Privacy+Notice.pdf" target="_blank">Privacy Notice</a> | <a href="https://github.com/lanelookout/lanelookout" target="_blank">Source code</a> | <a href="https://www.gofundme.com/lanelookout" target="_blank">Support</a>
+          <Link to='/about'>About</Link> | <a href="https://oak-bike.s3-us-west-1.amazonaws.com/LaneLookout+Privacy+Notice.pdf" target="_blank" rel="noopener noreferrer">Privacy Notice</a> | <a href="https://github.com/lanelookout/lanelookout" target="_blank" rel="noopener noreferrer">Source code</a> | <a href="https://www.gofundme.com/lanelookout" target="_blank" rel="noopener noreferrer">Support</a>
         </div>
       </Form>
       <Map

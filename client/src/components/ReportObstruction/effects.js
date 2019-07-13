@@ -1,11 +1,5 @@
-const bucketUrl = 'https://s3-us-west-1.amazonaws.com/oak-bike/';
 
-const makeid = () => {
-  let text = '';
-  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  for (let i = 0; i < 24; i += 1) text += possible.charAt(Math.floor(Math.random() * 62));
-  return text;
-};
+
 
 
 export const getUserLocation = (options = {}) => new Promise((resolve, reject) => {

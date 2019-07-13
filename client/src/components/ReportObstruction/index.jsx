@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { FORM, SUBMISSION, COMPLETE } from "../../constants/report";
+import React, { useState } from "react";
+import { FORM,  COMPLETE } from "../../constants/report";
 import Upload from './Upload';
 import Location from './Location';
 import Heat from "./Heat";
@@ -28,9 +28,7 @@ const ReportObstructionUI = (props) => {
     right: 0,
     alignItems: "center"
   };
-  const savereport = () => {
-    setStatus(SUBMISSION);
-  }
+ 
   const ADDREPORT = gql`
   mutation createReport($imgUrl: String, $lat: Float, $lng: Float, $contact: String, $description: String, $reporttype: String) {
     createReport(imgUrl: $imgUrl, lat: $lat, lng: $lng, contact: $contact, description: $description, reporttype: $reporttype) {
@@ -39,13 +37,7 @@ const ReportObstructionUI = (props) => {
     }
   }
   `;
-  const LISTREPORT = gql`
-    {
-      listReports{
-        id
-      }
-    }
-  `;
+  
   const ReportForm = () => {
     return <Container style={fixTop}>
       <Header as='h1' textAlign="center">Report Obstruction</Header>
@@ -91,25 +83,15 @@ const ReportObstructionUI = (props) => {
           setCoords={setCoords}
           coords={coords}
         /></>);
-      break;
     case COMPLETE:
       return (<>
       <Heat
-          coords={coords}
+          zoom={11}
       />
-        <Location
-          setZoom={setZoom}
-          zoom={zoom}
-          setCoords={setCoords}
-          coords={coords}
-        />
         <Button color='red' fluid as={Link} to="/report" size='massive'>Report Obstruction</Button>
         </>);
-      break;
-
     default:
       return (<p>DEFAULT</p>)
-      break;
   }
 
 }

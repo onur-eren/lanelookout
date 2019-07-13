@@ -1,8 +1,7 @@
 import React from "react";
 import Dropzone from "react-dropzone";
-import { LOCATION } from "../../constants/report";
 import { doUploadImage } from "../../redux/report/effects";
-import { Button, Container } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 
 
 const Upload = ({ setImgUrl, setStatus }) => {
