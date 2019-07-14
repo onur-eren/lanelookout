@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FORM, COMPLETE } from "../../constants/report";
 import Location from './Location';
-import HeatMap from "./HeatMap";
 import ReportForm from "./ReportForm";
 import { Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
@@ -11,17 +10,12 @@ import { getUserLocation } from "./effects";
 // import Details from './Details';
 
 const ReportObstructionUI = (props) => {
-  const [status, setStatus] = useState(COMPLETE);
+  const [status, setStatus] = useState(FORM);
   const [coords, setCoords] = useState({ lat: null, lng: null });
   const [zoom, setZoom] = useState(14);
-
+  const [isHeatmapOn, setIsHeatmapOn] = useState(true);
   useEffect(() => {
-    getUserLocation().then(position => {
-      setCoords({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      });
-    });
+   
   }, []);
 
 
@@ -36,33 +30,42 @@ const ReportObstructionUI = (props) => {
     alignItems: "center"
   };
 
-  
-
-  switch (status) {
-    case FORM:
-      return (<>
-        <ReportForm 
-          setStatus={setStatus}
-          coords={coords}
-          setZoom={setZoom}
-        />
-        <Location
-          coords={coords}
-          zoom={zoom}
-          setCoords={setCoords}
-        />
+  const renderSwitch = (param) => {
+    switch (param) {
+      case FORM:
+        return(<>
+          <ReportForm
+            setStatus={setStatus}
+            coords={coords}
+            setZoom={setZoom}
+          />
+        </>)
+      case COMPLETE:
+          return(<>
+          <Button style={fixBottom} color='red' fluid as={Link} onClick={() => { setStatus(FORM) }} to="/report" size='massive'>Report Obstruction</Button>
         </>);
-    case COMPLETE:
-      return (<>
-        <HeatMap
-          zoom={zoom}
-          coords={coords}
-        />
-        <Button style={fixBottom} color='red' fluid as={Link} onClick={()=>{setStatus(FORM)}} to="/report" size='massive'>Report Obstruction</Button>
-      </>);
-    default:
-      return (<p>DEFAULT</p>)
+      default:
+        return <p>Default</p>;
+    }
   }
+const heatSwitch = (e)=>{
+  setIsHeatmapOn(e.target.checked);
+}
+  return (<>
+    IsHeatOn
+    <input 
+    type="checkbox"
+    checked={isHeatmapOn}
+    onChange={ heatSwitch } />
+    { renderSwitch(status) }
+    <Location
+      zoom={zoom}
+      coords={coords}
+      isHeatmapOn = {isHeatmapOn}
+      setCoords={setCoords}
+    />
+    </>
+  );
 
 }
 
