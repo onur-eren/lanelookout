@@ -5,6 +5,7 @@ import {
   DETAILS,
   SUBMISSION,
   COMPLETE,
+  reportTypes
 } from "../../constants/report";
 import Upload from './Upload';
 import Location from './Location';
