@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FORM, COMPLETE } from "../../constants/report";
-import Location from './Location';
+import ReportMap from './ReportMap';
 import ReportForm from "./ReportForm";
 import { Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
@@ -42,23 +42,27 @@ const ReportObstructionUI = (props) => {
         </>)
       case COMPLETE:
           return(<>
+          {/* Report Obstruction */}
           <Button style={fixBottom} color='red' fluid as={Link} onClick={() => { setStatus(FORM) }} to="/report" size='massive'>Report Obstruction</Button>
         </>);
       default:
-        return <p>Default</p>;
+        return <></>;
     }
   }
 const heatSwitch = (e)=>{
   setIsHeatmapOn(e.target.checked);
 }
   return (<>
-    IsHeatOn
+    
+    <label for="isHeatmapOn">IsHeatOn</label>
     <input 
     type="checkbox"
+    id="isHeatmapOn"
+    name="isHeatmapOn"
     checked={isHeatmapOn}
     onChange={ heatSwitch } />
     { renderSwitch(status) }
-    <Location
+    <ReportMap
       zoom={zoom}
       coords={coords}
       isHeatmapOn = {isHeatmapOn}

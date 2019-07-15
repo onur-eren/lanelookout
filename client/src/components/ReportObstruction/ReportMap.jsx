@@ -5,7 +5,7 @@ import { Map, Marker, TileLayer } from 'react-leaflet'
 import { getUserLocation } from "./effects";
 import HeatLayer from "./HeatLayer";
 
-const Location = ({
+const ReportMap = ({
   zoom,
   coords,
   setCoords,
@@ -96,5 +96,5 @@ const Location = ({
 
 
 
-export default Location
+export default ReportMap
 
