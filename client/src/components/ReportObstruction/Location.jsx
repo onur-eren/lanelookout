@@ -5,14 +5,23 @@ import { getUserLocation } from "./effects";
 import Details from "./Details";
 import { Button, Container, Header } from 'semantic-ui-react'
 
-const mapBottomOffset = 124;
+const fixBottom = {
+  position: 'absolute',
+  shadowColor: '#000',
+  shadowOpacity: 0.2,
+  shadowOffset: { height: 1 },
+  zIndex: 9900,
+  left: 0,
+  bottom: 0,
+  alignItems: "center"
+};
 
 const Location = ({initZoom, coords, setStatus, setCoords }) => {
   // <Map> requires an absolute height
-  const [height, setHeight] = useState(document.documentElement.clientHeight - mapBottomOffset);
+  const [height, setHeight] = useState(document.documentElement.clientHeight);
   useEffect(() => {
     const handleResize = () => {
-      setHeight(document.documentElement.clientHeight - mapBottomOffset);
+      setHeight(document.documentElement.clientHeight);
     }
     window.addEventListener("resize", handleResize);
     handleResize();
@@ -61,7 +70,7 @@ const Location = ({initZoom, coords, setStatus, setCoords }) => {
         />
         <Marker position={center} />
       </Map>
-        <Button color='red' fluid size='massive' onClick={saveLocation}>Save</Button>
+        <Button style={fixBottom} color='red' fluid size='massive' onClick={saveLocation}>Save</Button>
     </>
   );
 };

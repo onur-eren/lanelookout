@@ -36,9 +36,6 @@ function ReportType({ setStatus, setReportType, reportType }) {
             )
         })
     }
-    const handleSubmit = (event)=> {
-        setStatus(SUBMISSION);
-    }
     // Returning DEFAULT Component
     return (
         <center style={{ backgroundColor: 'gray' }}>

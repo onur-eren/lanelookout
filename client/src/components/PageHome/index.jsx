@@ -63,7 +63,7 @@ const Heatmap = ({ data: { loading, listReports} }) => {
             style={{ height }}
           >
               <HeatmapLayer
-                points={listReports && listReports.map(report => ([report.lat, report.lng]))}
+                points={listReports?listReports.map(report => ([report.lat, report.lng])):[]}
                 longitudeExtractor={m => m[1]}
                 latitudeExtractor={m => m[0]}
                 intensityExtractor={m => parseFloat(m[2])}

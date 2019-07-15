@@ -23,6 +23,7 @@ class Details extends React.Component {
                 lat: this.props.coords.lat,
                 lng: this.props.coords.lng,
                 reportType: this.props.reportType,
+                description: this.props.description
             },
         })
 
