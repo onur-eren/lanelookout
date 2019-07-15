@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { DETAILS, coordsOakland } from "../../constants/report";
 import { getUserLocation } from "./effects";
+import Details from "./Details";
 import { Button, Container, Header } from 'semantic-ui-react'
 
-const mapBottomOffset = 62;
+const mapBottomOffset = 124;
 
 const Location = ({initZoom, coords, setStatus, setCoords }) => {
   // <Map> requires an absolute height

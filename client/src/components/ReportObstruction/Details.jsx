@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom'
 
 const createReportMutation = gql`
-  mutation createReport($imgUrl: String, $lat: Float, $lng: Float, $contact: String, $description: String) {
-    createReport(imgUrl: $imgUrl, lat: $lat, lng: $lng, contact: $contact, description: $description) {
+  mutation createReport($imgUrl: String, $lat: Float, $lng: Float, $contact: String, $description: String, $reportType: String) {
+    createReport(imgUrl: $imgUrl, lat: $lat, lng: $lng, contact: $contact, description: $description, reportType: $reportType) {
         id
     }
   }
@@ -22,6 +22,7 @@ class Details extends React.Component {
                 imgUrl: this.props.imgUrl,
                 lat: this.props.coords.lat,
                 lng: this.props.coords.lng,
+                reportType: this.props.reportType,
             },
         })
 
@@ -46,4 +47,3 @@ class Details extends React.Component {
 }
 
 export default withRouter(graphql(createReportMutation, { name: 'createReportMutation' })(Details))
-
