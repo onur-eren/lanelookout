@@ -3,7 +3,8 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { DETAILS, coordsOakland } from "../../constants/report";
 import { getUserLocation } from "./effects";
 import Details from "./Details";
-import { Button, Container, Header } from 'semantic-ui-react'
+import { Button, Container, Header, StepDescription } from 'semantic-ui-react'
+import ReportType from './ReportType';
 
 const fixBottom = {
   position: 'absolute',
@@ -16,7 +17,18 @@ const fixBottom = {
   alignItems: "center"
 };
 
-const Location = ({initZoom, coords, setStatus, setCoords }) => {
+const fixTop = {
+  position: 'absolute',
+  shadowColor: '#000',
+  zIndex: 9900,
+  left: 0,
+  right: 0,
+  alignItems: "center",
+  marginHorizontal:30
+};
+const Location = ({ setStatus, initZoom, coords, setCoords,
+  setReportType,
+  reportType, setDescription }) => {
   // <Map> requires an absolute height
   const [height, setHeight] = useState(document.documentElement.clientHeight);
   useEffect(() => {
@@ -51,27 +63,45 @@ const Location = ({initZoom, coords, setStatus, setCoords }) => {
   }, []);
 
   const saveLocation = () => {
+    console.log("saveLocation...");
     setCoords(center);
     setStatus(DETAILS);
   };
+  const handleChange = (event) => {
+    setDescription(event.currentTarget.value);
+  };
 
-  return (
-    <>
-      <Map
-        center={center}
-        zoom={zoom}
-        onDrag={onDrag}
-        onZoom={onZoom}
-        style={{ height }}
-      >
-        <TileLayer
-          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={center} />
-      </Map>
-        <Button style={fixBottom} color='red' fluid size='massive' onClick={saveLocation}>Save</Button>
-    </>
+  return (<>
+    <div style={fixTop}>
+      <ReportType
+        setStatus={setStatus}
+        setReportType={setReportType}
+        reportType={reportType}
+      />
+      <center>
+          <textarea
+          onChange={handleChange}
+          style={{ width: 400, height: 70 }}
+          placeholder="Describe report"
+        ></textarea>
+      </center>
+    </div>
+    <Map
+      center={center}
+      zoom={zoom}
+      onDrag={onDrag}
+      onZoom={onZoom}
+      style={{ height }}
+    >
+      <TileLayer
+        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker position={center} />
+    </Map>
+    <Button style={fixBottom} color='red' fluid size='massive' onClick={saveLocation}>Save</Button>
+
+  </>
   );
 };
 

@@ -1,23 +1,23 @@
 import React from "react";
 
-function Description({ setDescription }) {
+function Description({ setDescription,description }) {
 
     const handleChange = (event) => {
+        event.preventDefault();
         setDescription(event.currentTarget.value);
+        console.log(event.currentTarget.value);
     }
-    const Element = () => {
-        return <label>
+    return (
+        <center style={{ backgroundColor: 'gray' }}>
+            <label>
             Description:
            <textarea
+                value={description}
                 style={{ width: 300, height:100 }}
                 placeholder="Describe report"
                 onChange={handleChange}
             ></textarea>
         </label>
-    }
-    return (
-        <center style={{ backgroundColor: 'gray' }}>
-            <Element/>
         </center>
     );
 }
