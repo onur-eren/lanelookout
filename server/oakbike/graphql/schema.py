@@ -42,6 +42,7 @@ class CreateReport(graphene.Mutation):
         contact = kwargs.get('contact')
         description = kwargs.get('description')
         source = kwargs.get('source')
+        report_type = kwargs.get('report_type')
 
         if img_url:
             r.img_url = img_url
