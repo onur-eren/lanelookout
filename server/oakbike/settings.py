@@ -145,9 +145,8 @@ GRAPHQL_DEBUG = env('GRAPHQL_DEBUG', default=DEBUG)
 
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
+    django_heroku.settings(locals())
 
-django_heroku.settings(locals())
-
-# TODO - needs more investigation. For now:
-# https://github.com/kennethreitz/dj-database-url/issues/107
-del DATABASES['default']['OPTIONS']['sslmode']
+    # TODO - needs more investigation. For now:
+    # https://github.com/kennethreitz/dj-database-url/issues/107
+    del DATABASES['default']['OPTIONS']['sslmode']
