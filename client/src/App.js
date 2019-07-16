@@ -36,6 +36,7 @@ const App = () => {
       <Router history={history}>
         <Switch>
           <Route exact path="/" component={PageHome} />
+          <Route exact path="/:zoom/:lat/:lng" component={PageHome} />
           <Route path="/about" component={About} />
           <Route path="/mission" component={Mission} />
           <Route path="/report" component={ReportObstruction} />

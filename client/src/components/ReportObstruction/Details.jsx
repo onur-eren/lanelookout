@@ -27,7 +27,7 @@ class Details extends React.Component {
 
         // Start counting when the page is loaded
          this.timeoutHandle = setTimeout(()=>{
-           this.props.history.push('/')
+           this.props.history.push('/18/'+this.props.coords.lat+'/'+this.props.coords.lng)
          }, 3000);
     }
 

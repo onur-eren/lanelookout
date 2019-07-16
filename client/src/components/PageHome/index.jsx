@@ -21,7 +21,7 @@ const listReportsQuery = gql`
 const mapBottomOffset = 228;
 const initZoom = 13;
 
-const Heatmap = ({ data: { loading, listReports} }) => {
+const Heatmap = (props ) => {
   // <Map> requires an absolute height
   const [height, setHeight] = useState(document.documentElement.clientHeight - mapBottomOffset);
   useEffect(() => {
@@ -30,17 +30,30 @@ const Heatmap = ({ data: { loading, listReports} }) => {
     }
     window.addEventListener("resize", handleResize);
     handleResize();
+    // TIMEOUT TO ZOOMOUT
+    let timeoutHandle;
+    if(props.match.params.zoom){
+      timeoutHandle = setTimeout(() => {
+        setZoom(initZoom);
+      }, 5000);
+    }
+    // RETURN
     return () => {
       window.removeEventListener("resize", handleResize);
-    }
-  }, []);
+      clearTimeout(timeoutHandle);
+    }}, [setZoom]);
+  //CENTER
+  const [center, setCenter] = useState(
+    (props.match.params.lat||props.match.params.lng) ?
+    { lat:props.match.params.lat, lng:props.match.params.lng } : coordsOakland );
 
-  const [center, setCenter] = useState(coordsOakland);
   const onDrag = (event) => {
     setCenter(event.target.getCenter());
   }
 
-  const [zoom, setZoom] = useState(initZoom);
+  const [zoom, setZoom] = useState(
+    props.match.params.zoom ? props.match.params.zoom : initZoom
+  );
   const onZoom = (event) => {
     setZoom(event.target.getZoom());
   };
@@ -48,7 +61,7 @@ const Heatmap = ({ data: { loading, listReports} }) => {
 
     return (
   <div className="home-container">
-      <Form className="home-top" loading={loading}>
+      <Form className="home-top" loading={props.data.loading}>
         <Header as='h1' textAlign="center" className="home-header">LaneLookout</Header>
         <Header as='h4' textAlign="center" className="home-sub-header">A non-profit app to help Oakland cyclists report obstructions in biking infastructure. Created by an <a href="https://openoakland.org" target="_blank">OpenOakland</a> group, a Code For America brigade. </Header>
         <div className="home-links">
@@ -63,7 +76,12 @@ const Heatmap = ({ data: { loading, listReports} }) => {
             style={{ height }}
           >
               <HeatmapLayer
-                points={listReports && listReports.map(report => ([report.lat, report.lng]))}
+                points={(
+                  props.data.listReports ? 
+                  props.data.listReports.map(
+                    report => ([report.lat, report.lng])
+                  ) : []
+                )}
                 longitudeExtractor={m => m[1]}
                 latitudeExtractor={m => m[0]}
                 intensityExtractor={m => parseFloat(m[2])}
