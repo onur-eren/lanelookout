@@ -9,3 +9,8 @@ export const coordsOakland = {
   lng: -122.2662702
 };
 
+export const reportTypes = [
+  ["H", "Pothole"],
+  ["P", "Parking"],
+  ["O", "Other"]
+];

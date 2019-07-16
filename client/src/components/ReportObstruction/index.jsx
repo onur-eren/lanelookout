@@ -5,6 +5,7 @@ import {
   DETAILS,
   SUBMISSION,
   COMPLETE,
+  reportTypes
 } from "../../constants/report";
 import Upload from './Upload';
 import Location from './Location';
@@ -14,26 +15,33 @@ const ReportObstructionUI = (props) => {
   const [status, setStatus] = useState(UPLOAD);
   const [imgUrl, setImgUrl] = useState();
   const [coords, setCoords] = useState();
+  const [reportType, setReportType] = useState(reportTypes[0][0]);
+  const [description, setDescription] = useState('');
 
   switch(status) {
     case UPLOAD:
-      return <Upload
+      return (<Upload
         setImgUrl={setImgUrl}
         setStatus={setStatus}
-      />;
+      />);
     case LOCATION:
-      return <Location
+      return (<Location
         setStatus={setStatus}
         initZoom={14}
         coords={coords}
         setCoords={setCoords}
-      />;
+        setReportType={setReportType}
+        reportType={reportType}
+        setDescription={setDescription}
+      />);
     case DETAILS:
-      return <Details
+      return (<Details
         setStatus={setStatus}
         imgUrl={imgUrl}
         coords={coords}
-      />;
+        reportType={reportType}
+        description={description}
+      />);
     case SUBMISSION:
       return (<p>...</p>);
     case COMPLETE:
