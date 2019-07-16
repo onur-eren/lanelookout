@@ -1,0 +1,13 @@
+.fixtop{
+    position: absolute;
+    z-index: 9900;
+    left: 50%;
+    margin-left: -200px;
+    width: 400px;
+    height: 70px;
+}
+.fixBottom{
+    position: absolute;
+    z-index: 9900;
+    bottom:0;
+}
