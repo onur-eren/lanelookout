@@ -3,4 +3,4 @@ export const coordsOakland = {
   lng: -122.2662702
 };
 
-export const S3_URL = 'https://s3-us-west-1.amazonaws.com/oak-bike/'
+export const S3_URL = 'https://s3-us-west-1.amazonaws.com/oe-bike/'
