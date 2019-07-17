@@ -27,6 +27,7 @@ Peek inside `./d` for more.
 ### Frontend
 ```
 cd client
+cp .env.example .env
 yarn
 yarn run start
 ```

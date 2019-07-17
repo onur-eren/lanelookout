@@ -37,3 +37,8 @@ code {
 .home-sub-header {
     margin-top: 0px !important;
 }
+
+#submit-report-btn {
+    position: absolute;
+    bottom: 0px;
+}
