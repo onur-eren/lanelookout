@@ -3,11 +3,12 @@
 set -e
 
 function migrate {
-    if psql -h db -U postgres -lqt | cut -d \| -f 1 | grep -qw ${POSTGRES_GM_DB}; then
+    if psql -h db -lqt | cut -d \| -f 1 | grep -qw ${POSTGRES_GM_DB}; then
         echo "Database exists. Not creating"
     else
-        psql -h db -U postgres -c "CREATE DATABASE ${POSTGRES_GM_DB}"
+        psql -h db -c "CREATE DATABASE ${POSTGRES_GM_DB}"
     fi
+    python manage.py makemigrations oakbike
     python manage.py migrate
 }
 
@@ -52,7 +53,7 @@ function test {
 }
 
 # Wait for the postgres container to actually be up and running
-until psql -h db -U postgres -c '\q'; do
+until psql -h db -c '\q'; do
   >&2 echo "Postgres is unavailable - sleeping"
   sleep 1
 done

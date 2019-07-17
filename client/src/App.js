@@ -19,7 +19,7 @@ const client = new ApolloClient({
     uri:
       process.env.NODE_ENV === 'production'
         ? 'https://www.lanelookout.org/gql/'
-        : 'http://0.0.0.0:5000/gql/',
+        : 'http://192.168.99.100:5000/gql/',
   }),
   cache: new InMemoryCache(),
   defaultOptions: {
