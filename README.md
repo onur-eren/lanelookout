@@ -1,7 +1,7 @@
 # Lane Lookout
 <img src='https://i.imgur.com/y2yWHPb.png' height="400px"/>
 
-Lane Lookout ([https://www.lanelookout.org](https://www.lanelookout.org])) is a web app to help cyclists report lane obstructions and violations. We take this data, aggregrate it, and send it to the relevant parking enforcement authorities so that cyclists can ride safe.
+Lane Lookout ([https://www.lanelookout.org](https://www.lanelookout.org)) is a web app to help cyclists report lane obstructions and violations. We take this data, aggregrate it, and send it to the relevant parking enforcement authorities so that cyclists can ride safe.
 
 We're part of the [Oakland chapter](www.openoakland.org) of Code For America. We meet every Tuesday in City Hall. Come [say hello](https://www.meetup.com/OpenOakland) or join #oak-dot-bikes in the OpenOakland Slack group.
 
