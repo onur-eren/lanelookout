@@ -1,6 +1,10 @@
 import django_heroku
 import os
 import environ
+import pytz
+
+from django.utils import timezone
+
 root = environ.Path(__file__) - 2                            # two folders back (/a/b/ - 2 = /)
 DEFAULT_ENV_PATH = environ.Path(__file__) - 3                # default location of .env file
 DEFAULT_ENV_FILE = DEFAULT_ENV_PATH.path('.env')()
@@ -76,6 +80,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'oakbike.wsgi.application'
 
+# NOTE - This displays everything as PST. Everything in the backend is
+# still stored as UTC
+ZONE = "US/Pacific"
+timezone.activate(pytz.timezone(ZONE))
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
