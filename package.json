@@ -13,7 +13,7 @@
   },
   "lint-staged": {
     "client/src/**/*.{js,jsx,json,css}": [
-      "prettier --write --config ./.prettierrc.yaml",
+      "prettier --write --config ./.prettierrc",
       "git add"
     ]
   },
