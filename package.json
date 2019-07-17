@@ -1,5 +1,5 @@
 {
-  "name": "auranexus",
+  "name": "lanelookout",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -8,6 +8,11 @@
   "scripts": {
     "build": "yarn --cwd client && yarn --cwd client run build",
     "postinstall": "yarn --cwd run build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "client/src/**/*.{js,jsx,json,css}": [

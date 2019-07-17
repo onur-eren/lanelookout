@@ -19,7 +19,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DJANGO_DEBUG', default=False)
 
-ALLOWED_HOSTS = ['0.0.0.0', 'lanelookout.org']
+ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_WHITELIST = [
     'https://www.lanelookout.org',
     'http://localhost:3000'
